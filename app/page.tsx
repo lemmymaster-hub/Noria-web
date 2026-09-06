@@ -8,8 +8,8 @@ import { feature } from "topojson-client";
 import type { Feature, FeatureCollection } from "geojson";
 import type { Topology } from "topojson-specification";
 import worldAtlas from "world-atlas/countries-110m.json";
-
-type Language = "bhs" | "en";
+import { useHydrated, useLanguage, useReducedMotion } from "./preferences";
+import type { Language } from "./preferences";
 
 type City = {
   name: string;
@@ -53,6 +53,9 @@ const copy = {
   bhs: {
     enter: "POKRENI NORIA MREŽU",
     enterHint: "KLIKNI LOGO ZA ULAZ",
+    skipIntro: "Preskoči uvod",
+    introTitle: "Dobro došli u Noria Technologies",
+    initializing: "POKRETANJE NORIA MREŽE",
     introLabel: "SOFTWARE ZA PAMETNE GRADOVE I BIZNISE",
     network: "MREŽA URBANE MOBILNOSTI",
     hub: "SARAJEVO · CENTRALNI HUB",
@@ -95,6 +98,9 @@ const copy = {
   en: {
     enter: "START THE NORIA NETWORK",
     enterHint: "CLICK THE LOGO TO ENTER",
+    skipIntro: "Skip intro",
+    introTitle: "Welcome to Noria Technologies",
+    initializing: "INITIALIZING NORIA NETWORK",
     introLabel: "SOFTWARE FOR SMART CITIES & BUSINESSES",
     network: "URBAN MOBILITY NETWORK",
     hub: "SARAJEVO · CENTRAL HUB",
@@ -251,7 +257,7 @@ function LogoSequence({ stage }: { stage: number }) {
   );
 }
 
-function NetworkMap({ language }: { language: Language }) {
+function NetworkMap({ language, reducedMotion }: { language: Language; reducedMotion: boolean }) {
   const [selectedCity, setSelectedCity] = useState("Sarajevo");
   const [activeCountry, setActiveCountry] = useState("");
 
@@ -312,7 +318,7 @@ function NetworkMap({ language }: { language: Language }) {
             : "Western Balkans urban mobility network map"
         }
         className="network-map"
-        role="img"
+        role="group"
         viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
       >
         <defs>
@@ -346,6 +352,7 @@ function NetworkMap({ language }: { language: Language }) {
           {map.countries.map((country) => (
             <path
               aria-label={country.name}
+              aria-pressed={activeCountry === country.name}
               className={activeCountry === country.name ? "is-active" : ""}
               d={country.path}
               key={country.id}
@@ -373,18 +380,20 @@ function NetworkMap({ language }: { language: Language }) {
                 d={route.path}
                 style={{ animationDelay: `${route.delay}s` }}
               />
-              <circle className="route-packet" r="3.2">
-                <animateMotion
-                  begin={`${route.delay}s`}
-                  dur={`${route.duration}s`}
-                  repeatCount="indefinite"
-                  rotate="auto"
-                >
-                  <mpath href={`#${route.id}`} />
-                </animateMotion>
-              </circle>
+              {!reducedMotion && (
+                <circle className="route-packet" r="3.2">
+                  <animateMotion
+                    begin={`${route.delay}s`}
+                    dur={`${route.duration}s`}
+                    repeatCount="indefinite"
+                    rotate="auto"
+                  >
+                    <mpath href={`#${route.id}`} />
+                  </animateMotion>
+                </circle>
+              )}
               <path d={route.path} fill="none" id={route.id} stroke="none" />
-              {index % 4 === 0 && (
+              {!reducedMotion && index % 4 === 0 && (
                 <circle className="route-packet route-packet-secondary" r="2">
                   <animateMotion
                     begin={`${route.delay + 1.8}s`}
@@ -459,9 +468,62 @@ function NetworkMap({ language }: { language: Language }) {
   );
 }
 
+function SiteControls({
+  language,
+  setLanguage,
+  soundEnabled,
+  toggleSound,
+}: {
+  language: Language;
+  setLanguage: (language: Language) => void;
+  soundEnabled: boolean;
+  toggleSound: () => void;
+}) {
+  const t = copy[language];
+  return (
+    <div className="top-actions">
+      <button
+        aria-label={soundEnabled ? t.soundOn : t.soundOff}
+        aria-pressed={soundEnabled}
+        className={`sound-toggle ${soundEnabled ? "is-on" : ""}`}
+        data-ui-sound="off"
+        onClick={toggleSound}
+        type="button"
+      >
+        <span className="sound-bars" aria-hidden="true">
+          <i /><i /><i />
+        </span>
+        <span>{soundEnabled ? t.soundOn : t.soundOff}</span>
+      </button>
+      <div className="language-switch" role="group" aria-label={t.language}>
+        <button
+          aria-pressed={language === "bhs"}
+          className={language === "bhs" ? "is-active" : ""}
+          onClick={() => setLanguage("bhs")}
+          type="button"
+        >
+          BHS
+        </button>
+        <span />
+        <button
+          aria-pressed={language === "en"}
+          className={language === "en" ? "is-active" : ""}
+          onClick={() => setLanguage("en")}
+          type="button"
+        >
+          EN
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
-  const [language, setLanguage] = useState<Language>("bhs");
-  const [showIntro, setShowIntro] = useState(true);
+  const [language, setLanguage] = useLanguage();
+  const hydrated = useHydrated();
+  const reducedMotion = useReducedMotion();
+  const [introDismissed, setIntroDismissed] = useState(false);
+  const showIntro = hydrated && !introDismissed;
   const [introClosing, setIntroClosing] = useState(false);
   const [stage, setStage] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
@@ -469,6 +531,15 @@ export default function Home() {
   const audioPool = useRef<HTMLAudioElement[]>([]);
   const audioIndex = useRef(0);
   const soundEnabledRef = useRef(true);
+  const introDialog = useRef<HTMLDialogElement>(null);
+  const contentHeading = useRef<HTMLHeadingElement>(null);
+
+  const dismissIntro = useCallback(() => {
+    timers.current.forEach((timer) => window.clearTimeout(timer));
+    timers.current = [];
+    audioPool.current.forEach((audio) => audio.pause());
+    setIntroDismissed(true);
+  }, []);
 
   useEffect(() => {
     const activeTimers = timers.current;
@@ -489,12 +560,15 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("noria-language", language);
     document.documentElement.lang = language === "bhs" ? "bs" : "en";
   }, [language]);
 
   useEffect(() => {
-    if (!showIntro) return;
+    const dialog = introDialog.current;
+    if (!showIntro || !dialog) return;
+    const heading = contentHeading.current;
+
+    dialog.showModal();
 
     const root = document.documentElement;
     const previousRootOverflow = root.style.overflow;
@@ -515,12 +589,14 @@ export default function Home() {
     window.addEventListener("orientationchange", syncIntroHeight);
 
     return () => {
+      dialog.close();
       window.visualViewport?.removeEventListener("resize", syncIntroHeight);
       window.removeEventListener("orientationchange", syncIntroHeight);
       root.style.removeProperty("--intro-height");
       root.style.overflow = previousRootOverflow;
       root.style.overscrollBehavior = previousOverscroll;
       document.body.style.overflow = previousBodyOverflow;
+      heading?.focus({ preventScroll: true });
     };
   }, [showIntro]);
 
@@ -537,23 +613,20 @@ export default function Home() {
 
     const audio = audioPool.current[audioIndex.current % audioPool.current.length];
     audioIndex.current += 1;
-    audio.pause();
-    audio.currentTime = 0;
-    audio.volume = volume;
-    audio.play().catch(() => undefined);
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = volume;
+      audio.play().catch(() => undefined);
+    } catch {
+      // Optional sound must never block entering or using the site.
+    }
   }, []);
 
   const beginExperience = () => {
     if (stage > 0) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduceMotion) {
-      setStage(6);
-      playUiSound(0.5);
-      timers.current.push(
-        window.setTimeout(() => setIntroClosing(true), 500),
-        window.setTimeout(() => setShowIntro(false), 900),
-      );
+    if (reducedMotion) {
+      dismissIntro();
       return;
     }
 
@@ -572,7 +645,7 @@ export default function Home() {
         setStage(6);
       }, 3720),
       window.setTimeout(() => setIntroClosing(true), 4420),
-      window.setTimeout(() => setShowIntro(false), 4980),
+      window.setTimeout(dismissIntro, 4980),
     );
   };
 
@@ -600,7 +673,31 @@ export default function Home() {
   return (
     <main className="site-shell" onClickCapture={handleUiClick}>
       {showIntro && (
-        <section className={`intro-screen ${introClosing ? "is-closing" : ""}`}>
+        <dialog
+          aria-label={t.introTitle}
+          className={`intro-screen ${introClosing ? "is-closing" : ""}`}
+          onCancel={(event) => {
+            event.preventDefault();
+            dismissIntro();
+          }}
+          ref={introDialog}
+        >
+          <div className="intro-controls">
+            <button
+              className="intro-skip"
+              data-ui-sound="off"
+              onClick={dismissIntro}
+              type="button"
+            >
+              {t.skipIntro}
+            </button>
+            <SiteControls
+              language={language}
+              setLanguage={setLanguage}
+              soundEnabled={soundEnabled}
+              toggleSound={toggleSound}
+            />
+          </div>
           <div className="intro-grid" />
           <div className="intro-orbit intro-orbit-a" />
           <div className="intro-orbit intro-orbit-b" />
@@ -626,11 +723,11 @@ export default function Home() {
                 <span />
                 <span />
                 <span />
-                <small>INITIALIZING NORIA NETWORK</small>
+                <small>{t.initializing}</small>
               </div>
             )}
           </div>
-        </section>
+        </dialog>
       )}
 
       <div className="ambient ambient-a" />
@@ -640,43 +737,17 @@ export default function Home() {
       <div className="page-grid" />
 
       <header className="topbar">
-        <div className="top-actions">
-          <button
-            aria-label={soundEnabled ? t.soundOn : t.soundOff}
-            className={`sound-toggle ${soundEnabled ? "is-on" : ""}`}
-            onClick={toggleSound}
-            type="button"
-          >
-            <span className="sound-bars" aria-hidden="true">
-              <i />
-              <i />
-              <i />
-            </span>
-            <span>{soundEnabled ? t.soundOn : t.soundOff}</span>
-          </button>
-          <div className="language-switch" aria-label={t.language}>
-            <button
-              className={language === "bhs" ? "is-active" : ""}
-              onClick={() => setLanguage("bhs")}
-              type="button"
-            >
-              BHS
-            </button>
-            <span />
-            <button
-              className={language === "en" ? "is-active" : ""}
-              onClick={() => setLanguage("en")}
-              type="button"
-            >
-              EN
-            </button>
-          </div>
-        </div>
+        <SiteControls
+          language={language}
+          setLanguage={setLanguage}
+          soundEnabled={soundEnabled}
+          toggleSound={toggleSound}
+        />
       </header>
 
       <div className="hero-layout" id="top">
         <section className="map-column">
-          <NetworkMap language={language} />
+          <NetworkMap language={language} reducedMotion={reducedMotion} />
         </section>
 
         <section className="info-column">
@@ -685,7 +756,7 @@ export default function Home() {
               <i />
               {t.heroEyebrow}
             </span>
-            <h1>
+            <h1 ref={contentHeading} tabIndex={-1}>
               {t.heroTitleA}
               <span>{t.heroTitleB}</span>
             </h1>
@@ -712,11 +783,9 @@ export default function Home() {
             </div>
             <div className="product-list">
               {t.products.map((product, index) => (
-                <button
-                  aria-label={product.title}
+                <article
                   className="product-card"
                   key={product.title}
-                  type="button"
                 >
                   <div className="product-code">{product.code}</div>
                   <div>
@@ -724,10 +793,7 @@ export default function Home() {
                     <h3>{product.title}</h3>
                     <p>{product.text}</p>
                   </div>
-                  <span className="product-arrow" aria-hidden="true">
-                    ↗
-                  </span>
-                </button>
+                </article>
               ))}
             </div>
           </div>
