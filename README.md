@@ -1,8 +1,42 @@
-# vinext-starter
+# Noria Technologies
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+The Noria Technologies landing page: an interactive Western Balkans mobility
+map, product information, and BHS/English language controls. It runs on
+[vinext](https://github.com/cloudflare/vinext) and Cloudflare Workers through
+Sites. The optional D1 and authentication examples are not enabled on the page.
+
+## Page behavior
+
+- The language choice is restored on the next visit. If browser storage is
+  blocked, switching languages still works for the current visit.
+- The introduction can be skipped or dismissed with Escape. It opens as a
+  native modal only after hydration, so the server-rendered page stays readable
+  without JavaScript. Reduced-motion preferences skip the intro animation and
+  stop the map's moving packets.
+- The three products are informational cards while their pages are in
+  development.
+- Geist fonts are bundled in `public/fonts/` and referenced by `app/fonts.css`.
+  They do not depend on an absolute workspace path or a font-service request
+  during the build. Their SIL Open Font License is included alongside them.
+- Without a Cloudflare Images binding, the image endpoint serves the original
+  local image with the framework's security headers.
+
+## Verification and dependency updates
+
+CI runs the locked install, a dependency audit that blocks high/critical
+advisories, lint, TypeScript checking, the production build, and regression tests
+for the rendered page, font assets, image endpoint, and saved language
+preferences. Run `npm test` for the build and regression suite.
+
+Vinext is pinned to `1.0.0-beta.9` with its required RSC plugin and patched
+React/RSC versions. This replaces `0.0.50`, whose dependency tree included the
+unpatched `image-size` parser. Vinext remains prerelease software; review and
+validate future upgrades against the Sites Worker output.
+
+The scoped `@esbuild-kit/core-utils` override selects patched esbuild `0.25.12`
+for Drizzle Kit's legacy TypeScript loader. Keep it until Drizzle Kit replaces
+that dependency, and verify `npm run db:generate` when changing it. Avoid
+`npm audit fix --force`, which can suggest downgrading Drizzle Kit.
 
 ## Prerequisites
 
@@ -94,7 +128,10 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm run dev`: start the Vite/Vinext development server
 - `npm run build`: build and validate the deployable Sites artifact
 - `npm run start`: start the built Vinext application
-- `npm test`: build, validate, and verify the rendered development-preview metadata
+- `npm test`: build, validate, and run the page, asset, image, and preference regression tests
+- `npm run lint`: check the source with ESLint
+- `npm run typecheck`: check TypeScript types
+- `npm audit`: check the locked dependency tree against published advisories
 - `npm run validate:artifact`: recheck an existing artifact's manifest and ESM `default.fetch` export
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 

@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  --font-geist-sans: "Geist";
+  --font-geist-mono: "Geist Mono";
   --ink: #020b1b;
   --navy: #05213d;
   --navy-soft: #073355;
@@ -756,17 +758,12 @@ a:focus-visible,
     0 0 18px color-mix(in srgb, var(--card-accent) 12%, transparent),
     inset 0 1px 0 rgba(217, 255, 255, 0.08);
   color: inherit;
-  cursor: pointer;
   display: grid;
   gap: 12px;
-  grid-template-columns: 42px 1fr 20px;
+  grid-template-columns: 42px 1fr;
   padding: 10px 12px;
   position: relative;
   text-align: left;
-  transition:
-    background 200ms ease,
-    border-color 200ms ease,
-    transform 200ms ease;
   width: 100%;
 }
 
@@ -780,22 +777,6 @@ a:focus-visible,
 
 .product-card:nth-child(3) {
   --card-accent: #9f73ff;
-}
-
-.product-card:hover {
-  background:
-    radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--card-accent) 30%, transparent), transparent 38%),
-    linear-gradient(135deg, rgba(8, 77, 104, 0.96), rgba(4, 29, 58, 0.94));
-  border-color: color-mix(in srgb, var(--card-accent) 88%, white 12%);
-  box-shadow:
-    0 0 32px color-mix(in srgb, var(--card-accent) 28%, transparent),
-    inset 0 0 24px color-mix(in srgb, var(--card-accent) 8%, transparent);
-  transform: translateX(-4px);
-}
-
-.product-card:active {
-  filter: brightness(1.28);
-  transform: translateX(-2px) scale(0.992);
 }
 
 .product-code {
@@ -839,18 +820,6 @@ a:focus-visible,
   margin: 0;
 }
 
-.product-arrow {
-  color: var(--card-accent);
-  filter: drop-shadow(0 0 7px var(--card-accent));
-  font-size: 13px;
-  transition: color 180ms ease, transform 180ms ease;
-}
-
-.product-card:hover .product-arrow {
-  color: var(--cyan);
-  transform: translate(2px, -2px);
-}
-
 .capabilities {
   color: #86adbe;
   font-size: 8px;
@@ -884,6 +853,11 @@ footer div {
 }
 
 .intro-screen {
+  border: 0;
+  color: var(--white);
+  margin: 0;
+  max-width: none;
+  padding: 0;
   align-items: center;
   background:
     radial-gradient(circle at 50% 48%, rgba(45, 242, 255, 0.28), transparent 38%),
@@ -903,6 +877,33 @@ footer div {
   transition: opacity 0.62s ease, visibility 0.62s ease;
   visibility: visible;
   z-index: 100;
+}
+
+.intro-screen:not([open]) {
+  display: none;
+}
+
+.intro-controls {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  left: max(16px, env(safe-area-inset-left));
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 6;
+}
+
+.intro-skip {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 14px;
+  min-height: 44px;
+  padding: 10px 18px;
 }
 
 .intro-screen::after {
@@ -1405,7 +1406,7 @@ footer div {
   }
 
   .product-card {
-    grid-template-columns: 42px 1fr 16px;
+    grid-template-columns: 42px 1fr;
   }
 
   .sound-toggle,
@@ -1544,6 +1545,9 @@ footer div {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .route-packet {
+    display: none;
+  }
   *,
   *::before,
   *::after {
