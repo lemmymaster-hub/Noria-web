@@ -743,6 +743,18 @@ export default function Home() {
           soundEnabled={soundEnabled}
           toggleSound={toggleSound}
         />
+        <div className="site-brand">
+          <Image
+            alt=""
+            className="site-brand-logo"
+            height={1254}
+            priority
+            sizes="(max-width: 640px) 80px, 112px"
+            src="/noria-logo-transparent.png"
+            width={1254}
+          />
+          <span className="site-brand-name">Noria Technologies</span>
+        </div>
       </header>
 
       <div className="hero-layout" id="top">
