@@ -937,6 +937,91 @@ export default function Home() {
   const soundEnabledRef = useRef(true);
   const introDialog = useRef<HTMLDialogElement>(null);
   const contentHeading = useRef<HTMLHeadingElement>(null);
+  const infoPanel = useRef<HTMLElement>(null);
+  const scrollAnimation = useRef<number | null>(null);
+  const cancelScrollListeners = useRef<(() => void) | null>(null);
+
+  const stopAnimatedScroll = useCallback(() => {
+    if (scrollAnimation.current !== null) window.cancelAnimationFrame(scrollAnimation.current);
+    scrollAnimation.current = null;
+    cancelScrollListeners.current?.();
+    cancelScrollListeners.current = null;
+  }, []);
+
+  useEffect(() => () => stopAnimatedScroll(), [stopAnimatedScroll]);
+
+  const handleDirectionNavigation = useCallback((event: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    const id = event.currentTarget.hash.slice(1);
+    const target = document.getElementById(id);
+    const panel = infoPanel.current;
+    if (!target || !panel) return;
+
+    event.preventDefault();
+    stopAnimatedScroll();
+
+    const mobile = window.matchMedia("(max-width: 980px)").matches;
+    const start = mobile ? window.scrollY : panel.scrollTop;
+    const destination = mobile
+      ? start + target.getBoundingClientRect().top - 20
+      : start + target.getBoundingClientRect().top - panel.getBoundingClientRect().top - 24;
+    const maxScroll = mobile
+      ? document.documentElement.scrollHeight - window.innerHeight
+      : panel.scrollHeight - panel.clientHeight;
+    const end = Math.max(0, Math.min(destination, maxScroll));
+    const setPosition = (top: number) => {
+      if (mobile) window.scrollTo({ top, behavior: "instant" });
+      else panel.scrollTop = top;
+    };
+    const finish = () => {
+      window.history.pushState(null, "", `#${id}`);
+      if (!reducedMotion) {
+        const highlight = target.matches(".direction-card") ? target : target.querySelector("h2");
+        highlight?.animate(
+          [{ filter: "brightness(1)" }, { filter: "brightness(1.22)" }, { filter: "brightness(1)" }],
+          { duration: 950, easing: "ease-in-out" },
+        );
+      }
+    };
+
+    if (reducedMotion || Math.abs(end - start) < 2) {
+      setPosition(end);
+      finish();
+      return;
+    }
+
+    const duration = Math.min(1600, Math.max(1100, 850 + Math.abs(end - start) * 0.32));
+    const started = performance.now();
+    const cancel = () => stopAnimatedScroll();
+    const cancelWithKeyboard = (keyEvent: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(keyEvent.key)) cancel();
+    };
+    window.addEventListener("wheel", cancel, { passive: true });
+    window.addEventListener("touchstart", cancel, { passive: true });
+    window.addEventListener("pointerdown", cancel, { passive: true });
+    window.addEventListener("keydown", cancelWithKeyboard);
+    cancelScrollListeners.current = () => {
+      window.removeEventListener("wheel", cancel);
+      window.removeEventListener("touchstart", cancel);
+      window.removeEventListener("pointerdown", cancel);
+      window.removeEventListener("keydown", cancelWithKeyboard);
+    };
+
+    const frame = (now: number) => {
+      const progress = Math.min((now - started) / duration, 1);
+      const eased = progress < 0.5
+        ? 4 * progress ** 3
+        : 1 - (-2 * progress + 2) ** 3 / 2;
+      setPosition(start + (end - start) * eased);
+      if (progress < 1) scrollAnimation.current = window.requestAnimationFrame(frame);
+      else {
+        stopAnimatedScroll();
+        finish();
+      }
+    };
+    scrollAnimation.current = window.requestAnimationFrame(frame);
+  }, [reducedMotion, stopAnimatedScroll]);
 
   const dismissIntro = useCallback(() => {
     timers.current.forEach((timer) => window.clearTimeout(timer));
@@ -1183,7 +1268,7 @@ export default function Home() {
           <NetworkMap language={language} reducedMotion={reducedMotion} />
         </section>
 
-        <section className="info-column">
+        <section className="info-column" ref={infoPanel}>
           <div className="hero-copy">
             <span className="eyebrow">
               <i />
@@ -1212,11 +1297,11 @@ export default function Home() {
           <nav aria-label={t.directionsLabel} className="direction-index">
             <div className="direction-index-head">
               <span>{t.directionsLabel}</span>
-              <a href="#noria-directions">{t.exploreDirections} <span aria-hidden="true">↘</span></a>
+              <a href="#noria-directions" onClick={handleDirectionNavigation}>{t.exploreDirections} <span aria-hidden="true">↘</span></a>
             </div>
             <div className="direction-index-grid">
               {t.directions.map((direction, index) => (
-                <a href={`#direction-${direction.code.toLowerCase()}`} key={direction.code}>
+                <a href={`#direction-${direction.code.toLowerCase()}`} key={direction.code} onClick={handleDirectionNavigation}>
                   <span>0{index + 1}</span>
                   <strong>{direction.title}</strong>
                 </a>
