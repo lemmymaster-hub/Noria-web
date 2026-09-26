@@ -83,8 +83,8 @@ const copy = {
       },
       {
         code: "MESH",
-        title: "BSL Mesh",
-        text: "Otporna offline komunikacija za gradove, terenske i službe zaštite i spašavanja.",
+        title: "NRN Mesh",
+        text: "Noria Resilience Network Mesh — otporna offline komunikacija, SOS i koordinacija terenskih timova.",
       },
     ],
     company:
@@ -128,8 +128,8 @@ const copy = {
       },
       {
         code: "MESH",
-        title: "BSL Mesh",
-        text: "Resilient offline communication for cities, field teams and emergency services.",
+        title: "NRN Mesh",
+        text: "Noria Resilience Network Mesh — resilient offline communication, SOS and field-team coordination.",
       },
     ],
     company:
@@ -139,6 +139,211 @@ const copy = {
     language: "LANGUAGE",
     footer: "From Sarajevo, we are building digital infrastructure for a connected Western Balkans.",
     comingSoon: "FULL WEBSITE · COMING SOON",
+  },
+} as const;
+
+const aboutCopy = {
+  bhs: {
+    button: "O NORIA",
+    close: "ZATVORI",
+    eyebrow: "NORIA TECHNOLOGIES · O KOMPANIJI",
+    title: "Inteligentna infrastruktura za povezane gradove i otporna okruženja.",
+    intro:
+      "Noria Technologies razvija digitalnu infrastrukturu, softverske platforme i inteligentne sisteme koji povezuju urbanu mobilnost, gradske servise, fizičku infrastrukturu, podatke, AI i otpornu komunikaciju u jedinstvene operativne cjeline.",
+    identityTitle: "Ko smo",
+    identityText:
+      "Noria nije samo software studio niti jedna Smart City aplikacija. Naš cilj je izgraditi digitalni operativni sloj između fizičkog svijeta, podataka, ljudi i odluka — platformu koja može povezati postojeće gradske i poslovne sisteme umjesto da ih nepotrebno zamjenjuje.",
+    missionLabel: "MISIJA",
+    mission:
+      "Razvijati praktične, modularne i skalabilne digitalne sisteme koji gradovima i organizacijama pomažu da bolje upravljaju mobilnošću, infrastrukturom, komunikacijom i resursima.",
+    visionLabel: "VIZIJA",
+    vision:
+      "Izgraditi digitalni operativni sloj za gradove budućnosti i povezana okruženja.",
+    pillarsLabel: "ČETIRI STRATEŠKA STUBA",
+    pillars: [
+      {
+        code: "01",
+        title: "Smart City & Urban Mobility",
+        text: "Glavni komercijalni pravac Norije. Modularna platforma za parking, javni prevoz, taxi, aerodromsku mobilnost, EV infrastrukturu, plaćanja i gradske servise.",
+        items: ["BSL — Balkan Smart Life", "BSL Parking / Parkiraj.ba", "BSL Transit", "BSL Taxi", "BSL Airport", "BSL EV", "BSL Wallet", "Citizen Services"],
+      },
+      {
+        code: "02",
+        title: "Urban Intelligence & Command Systems",
+        text: "Objedinjavanje podataka iz različitih gradskih sistema u jedan operativni prikaz, analitiku i AI podršku odlučivanju.",
+        items: ["City Dashboard", "Mobility Analytics", "Real-time monitoring", "Predictive analytics", "Prescriptive recommendations", "Reporting & AI Assistant"],
+      },
+      {
+        code: "03",
+        title: "Resilient Communications & Public Safety",
+        text: "Komunikacija i koordinacija kada internet ili mobilna mreža nisu dostupni ili pouzdani.",
+        items: ["NRN Mesh", "SOS & multi-hop relay", "Offline maps", "NRN Dispatch Center", "LoRa / Meshtastic integracije", "Buduća drone integracija"],
+      },
+      {
+        code: "04",
+        title: "AI & Smart Infrastructure",
+        text: "Primjena AI-a, computer visiona i podataka na fizičku infrastrukturu i operativne procese.",
+        items: ["Smart Parking Vision", "Noria Smart Inspector", "Traffic analytics", "Anomaly detection", "Infrastructure analytics", "AI-assisted inspection"],
+      },
+    ],
+    productsLabel: "KLJUČNI PROIZVODI",
+    products: [
+      {
+        title: "BSL — Balkan Smart Life",
+        status: "FLAGSHIP",
+        text: "Modularna Smart City platforma koja povezuje mobilnost, gradske servise, informacije, plaćanja i podatke kroz zajednički citizen-facing i operativni sloj.",
+      },
+      {
+        title: "Noria Urban Intelligence",
+        status: "CORE PLATFORM",
+        text: "City Dashboard, objedinjeni urbani podaci, analitika, predikcije i preporuke za gradske operatere i donosioce odluka.",
+      },
+      {
+        title: "NRN Mesh",
+        status: "ACTIVE PROTOTYPE",
+        text: "Noria Resilience Network Mesh omogućava offline komunikaciju, relay poruke, SOS, lokaciju i budući dispatch sistem za terenske i hitne službe.",
+      },
+      {
+        title: "Noria Smart Inspector",
+        status: "R&D",
+        text: "AI-supported platforma za pregled i dokumentovanje fizičke infrastrukture korištenjem fotografija, videa, senzora i budućih drone izvora.",
+      },
+    ],
+    marketLabel: "KOME GRADIMO",
+    marketText:
+      "Primarno gradovima, opštinama, javnim preduzećima, parking i transportnim operatorima, aerodromima, taxi organizacijama, utility kompanijama i organizacijama kojima trebaju pouzdani operativni sistemi. Početni fokus je BiH i Zapadni Balkan, zatim Jugoistočna i Centralna Evropa.",
+    businessLabel: "POSLOVNI MODEL",
+    businessText:
+      "Noria treba da raste kao product company sa ponovljivim prihodima. Model uključuje implementaciju i integraciju, godišnje SaaS licence, licence po modulima, support i maintenance, white-label rješenja, analitiku, hardware integracije preko partnera i transakcione naknade tamo gdje su poslovno i regulatorno opravdane. Custom development ostaje podržavajući izvor prihoda, ali ne definiše identitet kompanije.",
+    nearLabel: "BLISKA BUDUĆNOST · 0–12 MJESECI",
+    near: [
+      "Preći iz prototype company u deployment company.",
+      "Ojačati korporativne, IP i osnovne operativne temelje za rast kompanije.",
+      "BSL fokusirati na Parking + Transit + City Dashboard i pripremiti produkcijski pilot.",
+      "Pretvoriti aktivne razgovore sa gradovima i operatorima u konkretan PoC, pilot ili komercijalnu implementaciju.",
+      "NRN Mesh stabilizovati za višeurđajni field test: relay + SOS + lokacija + Dispatch Center MVP.",
+      "Dobiti prvi komercijalni ugovor ili formalni pilot, realne korisnike, realne podatke i mjerljive KPI-jeve.",
+    ],
+    midLabel: "SREDNJOROČNO · 1–3 GODINE",
+    mid:
+      "Dokazati da isti Noria core može služiti više gradova bez ponovne izgradnje sistema od nule: više implementacija, recurring revenue, standardizovan onboarding, zajednički urban data model, API konektori, analytics i početni AI layer.",
+    longLabel: "DUGOROČNO · 3–5+ GODINA",
+    long:
+      "Razviti Noria Urban Operating Platform — zajednički tehnološki sloj koji povezuje mobility, infrastrukturu, payments, javne informacije, AI, resilience i command systems. BSL tada postaje citizen-facing dio znatno većeg operativnog ekosistema.",
+    principlesLabel: "PRINCIPI RAZVOJA",
+    principles: [
+      "Modularno i API-first: integrišemo postojeće sisteme umjesto da ih automatski zamjenjujemo.",
+      "DEPLOY > BUILD MORE: nova funkcija nema prednost nad realnom implementacijom i validacijom.",
+      "AI dolazi poslije kvalitetnih podataka — ne koristimo AI kao marketinšku etiketu.",
+      "Novi proizvod nastaje samo kada problem ne može prirodno postati modul postojećeg Noria sistema.",
+      "Regulisane funkcije poput plaćanja gradimo kroz licencirane partnere i jasnu podjelu odgovornosti.",
+      "Partneri proširuju ekosistem; Noria zadržava vlasništvo nad platformom, integracionim slojem i proizvodnim iskustvom.",
+    ],
+    finalTitle: "Od jednog problema do platforme.",
+    finalText:
+      "Naš neposredni cilj nije napraviti još deset prototipova. Cilj je riješiti jedan stvarni problem, implementirati ga kod stvarnog korisnika, izmjeriti rezultat, ponoviti ga kod drugog kupca i od toga izgraditi skalabilnu platformu.",
+    finalTagline: "NORIA TECHNOLOGIES · DIGITAL OPERATING LAYER FOR THE PHYSICAL WORLD",
+  },
+  en: {
+    button: "ABOUT NORIA",
+    close: "CLOSE",
+    eyebrow: "NORIA TECHNOLOGIES · ABOUT THE COMPANY",
+    title: "Intelligent infrastructure for connected cities and resilient environments.",
+    intro:
+      "Noria Technologies develops digital infrastructure, software platforms and intelligent systems that connect urban mobility, city services, physical infrastructure, real-time data, AI and resilient communications into integrated operational environments.",
+    identityTitle: "Who we are",
+    identityText:
+      "Noria is not simply a software studio or a single Smart City application. Our goal is to build the digital operating layer between the physical world, data, people and decisions — connecting existing city and business systems instead of replacing them without a reason.",
+    missionLabel: "MISSION",
+    mission:
+      "Build practical, modular and scalable digital systems that help cities and organizations manage mobility, infrastructure, communications and resources more effectively.",
+    visionLabel: "VISION",
+    vision:
+      "Build the digital operating layer for the cities of tomorrow and connected environments.",
+    pillarsLabel: "FOUR STRATEGIC PILLARS",
+    pillars: [
+      {
+        code: "01",
+        title: "Smart City & Urban Mobility",
+        text: "Noria's primary commercial direction: modular technology for parking, public transport, taxi, airport mobility, EV infrastructure, payments and city services.",
+        items: ["BSL — Balkan Smart Life", "BSL Parking / Parkiraj.ba", "BSL Transit", "BSL Taxi", "BSL Airport", "BSL EV", "BSL Wallet", "Citizen Services"],
+      },
+      {
+        code: "02",
+        title: "Urban Intelligence & Command Systems",
+        text: "Unifying data from fragmented city systems into a shared operational view, analytics and AI-assisted decision support.",
+        items: ["City Dashboard", "Mobility Analytics", "Real-time monitoring", "Predictive analytics", "Prescriptive recommendations", "Reporting & AI Assistant"],
+      },
+      {
+        code: "03",
+        title: "Resilient Communications & Public Safety",
+        text: "Communication and coordination designed to keep working when conventional internet or mobile infrastructure is unavailable or unreliable.",
+        items: ["NRN Mesh", "SOS & multi-hop relay", "Offline maps", "NRN Dispatch Center", "LoRa / Meshtastic integrations", "Future drone integration"],
+      },
+      {
+        code: "04",
+        title: "AI & Smart Infrastructure",
+        text: "Applying AI, computer vision and data to physical infrastructure and operational processes.",
+        items: ["Smart Parking Vision", "Noria Smart Inspector", "Traffic analytics", "Anomaly detection", "Infrastructure analytics", "AI-assisted inspection"],
+      },
+    ],
+    productsLabel: "KEY PRODUCTS",
+    products: [
+      {
+        title: "BSL — Balkan Smart Life",
+        status: "FLAGSHIP",
+        text: "A modular Smart City platform connecting mobility, city services, information, payments and data through shared citizen-facing and operational layers.",
+      },
+      {
+        title: "Noria Urban Intelligence",
+        status: "CORE PLATFORM",
+        text: "City Dashboard, unified urban data, analytics, forecasting and actionable recommendations for city operators and decision-makers.",
+      },
+      {
+        title: "NRN Mesh",
+        status: "ACTIVE PROTOTYPE",
+        text: "Noria Resilience Network Mesh provides offline communication, relay messaging, SOS, location and a future dispatch environment for field and emergency teams.",
+      },
+      {
+        title: "Noria Smart Inspector",
+        status: "R&D",
+        text: "An AI-supported platform for inspecting and documenting physical infrastructure using images, video, sensors and future drone data sources.",
+      },
+    ],
+    marketLabel: "WHO WE BUILD FOR",
+    marketText:
+      "Our primary customers are cities, municipalities, public utilities, parking and transport operators, airports, taxi organizations, utility companies and organizations that need reliable operational systems. The initial market focus is Bosnia and Herzegovina and the Western Balkans, followed by Southeast and Central Europe.",
+    businessLabel: "BUSINESS MODEL",
+    businessText:
+      "Noria is being built as a product company with repeatable recurring revenue. The model combines implementation and integration fees, annual SaaS licensing, per-module licensing, support and maintenance, white-label solutions, analytics, partner-delivered hardware integrations and transaction fees where commercially and legally appropriate. Custom development remains a supporting revenue stream, not the company's core identity.",
+    nearLabel: "NEAR TERM · 0–12 MONTHS",
+    near: [
+      "Move from a prototype company to a deployment company.",
+      "Strengthen the corporate, IP and operating foundations required for growth.",
+      "Focus BSL on Parking + Transit + City Dashboard and prepare a production-grade pilot.",
+      "Turn active discussions with cities and operators into a concrete PoC, pilot or commercial deployment.",
+      "Stabilize NRN Mesh for a multi-device field test: relay + SOS + location + Dispatch Center MVP.",
+      "Secure the first commercial contract or formal pilot with real users, real data and measurable KPIs.",
+    ],
+    midLabel: "MID TERM · 1–3 YEARS",
+    mid:
+      "Prove that the same Noria core can serve multiple cities without rebuilding the platform from scratch: multiple deployments, recurring revenue, standardized onboarding, a shared urban data model, API connectors, analytics and an initial AI layer.",
+    longLabel: "LONG TERM · 3–5+ YEARS",
+    long:
+      "Develop the Noria Urban Operating Platform — a shared technology layer connecting mobility, infrastructure, payments, public information, AI, resilience and command systems. BSL then becomes the citizen-facing layer of a much broader operational ecosystem.",
+    principlesLabel: "BUILDING PRINCIPLES",
+    principles: [
+      "Modular and API-first: integrate existing systems instead of automatically replacing them.",
+      "DEPLOY > BUILD MORE: real-world implementation and validation outrank another feature.",
+      "AI follows high-quality data — it is not used as a marketing label.",
+      "A new product is created only when the problem cannot naturally become a module of an existing Noria system.",
+      "Regulated functions such as payments are built through licensed partners with clear responsibility boundaries.",
+      "Partners extend the ecosystem; Noria retains ownership of the platform, integration layer and product experience.",
+    ],
+    finalTitle: "From one real problem to a scalable platform.",
+    finalText:
+      "Our immediate objective is not to create ten more prototypes. It is to solve one real problem, deploy it for a real user, measure the result, repeat it for a second customer and turn that repeatability into a scalable platform.",
+    finalTagline: "NORIA TECHNOLOGIES · DIGITAL OPERATING LAYER FOR THE PHYSICAL WORLD",
   },
 } as const;
 
@@ -468,20 +673,190 @@ function NetworkMap({ language, reducedMotion }: { language: Language; reducedMo
   );
 }
 
+function AboutNoria({
+  language,
+  onClose,
+}: {
+  language: Language;
+  onClose: () => void;
+}) {
+  const a = aboutCopy[language];
+
+  return (
+    <div
+      aria-label={a.title}
+      aria-modal="true"
+      className="about-overlay"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+      role="dialog"
+    >
+      <div className="about-shell">
+        <div className="about-topline">
+          <span>{a.eyebrow}</span>
+          <button
+            aria-label={a.close}
+            className="about-close"
+            onClick={onClose}
+            type="button"
+          >
+            <span>{a.close}</span>
+            <i aria-hidden="true">×</i>
+          </button>
+        </div>
+
+        <header className="about-hero">
+          <div>
+            <span className="about-index">NORIA / 01</span>
+            <h2>{a.title}</h2>
+          </div>
+          <p>{a.intro}</p>
+        </header>
+
+        <section className="about-identity">
+          <div className="about-section-heading">
+            <span>01</span>
+            <h3>{a.identityTitle}</h3>
+          </div>
+          <p className="about-lead">{a.identityText}</p>
+          <div className="about-mission-grid">
+            <article>
+              <small>{a.missionLabel}</small>
+              <p>{a.mission}</p>
+            </article>
+            <article>
+              <small>{a.visionLabel}</small>
+              <p>{a.vision}</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div className="about-section-heading">
+            <span>02</span>
+            <h3>{a.pillarsLabel}</h3>
+          </div>
+          <div className="about-pillar-grid">
+            {a.pillars.map((pillar) => (
+              <article className="about-pillar" key={pillar.code}>
+                <div className="about-card-code">{pillar.code}</div>
+                <h4>{pillar.title}</h4>
+                <p>{pillar.text}</p>
+                <ul>
+                  {pillar.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <div className="about-section-heading">
+            <span>03</span>
+            <h3>{a.productsLabel}</h3>
+          </div>
+          <div className="about-products-grid">
+            {a.products.map((product) => (
+              <article className="about-product" key={product.title}>
+                <small>{product.status}</small>
+                <h4>{product.title}</h4>
+                <p>{product.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="about-two-column">
+          <article>
+            <small>{a.marketLabel}</small>
+            <p>{a.marketText}</p>
+          </article>
+          <article>
+            <small>{a.businessLabel}</small>
+            <p>{a.businessText}</p>
+          </article>
+        </section>
+
+        <section>
+          <div className="about-section-heading">
+            <span>04</span>
+            <h3>{a.nearLabel}</h3>
+          </div>
+          <ol className="about-roadmap">
+            {a.near.map((item, index) => (
+              <li key={item}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{item}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="about-horizon-grid">
+            <article>
+              <small>{a.midLabel}</small>
+              <p>{a.mid}</p>
+            </article>
+            <article>
+              <small>{a.longLabel}</small>
+              <p>{a.long}</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div className="about-section-heading">
+            <span>05</span>
+            <h3>{a.principlesLabel}</h3>
+          </div>
+          <div className="about-principles">
+            {a.principles.map((principle, index) => (
+              <article key={principle}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <p>{principle}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="about-closing">
+          <span className="about-index">NORIA / FUTURE</span>
+          <h3>{a.finalTitle}</h3>
+          <p>{a.finalText}</p>
+          <strong>{a.finalTagline}</strong>
+        </section>
+      </div>
+    </div>
+  );
+}
+
 function SiteControls({
   language,
   setLanguage,
   soundEnabled,
   toggleSound,
+  onAbout,
 }: {
   language: Language;
   setLanguage: (language: Language) => void;
   soundEnabled: boolean;
   toggleSound: () => void;
+  onAbout?: () => void;
 }) {
   const t = copy[language];
   return (
     <div className="top-actions">
+      {onAbout && (
+        <button
+          className="about-toggle"
+          onClick={onAbout}
+          type="button"
+        >
+          <span className="about-toggle-dot" aria-hidden="true" />
+          <span>{aboutCopy[language].button}</span>
+        </button>
+      )}
       <button
         aria-label={soundEnabled ? t.soundOn : t.soundOff}
         aria-pressed={soundEnabled}
@@ -527,6 +902,7 @@ export default function Home() {
   const [introClosing, setIntroClosing] = useState(false);
   const [stage, setStage] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const timers = useRef<number[]>([]);
   const audioPool = useRef<HTMLAudioElement[]>([]);
   const audioIndex = useRef(0);
@@ -562,6 +938,27 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = language === "bhs" ? "bs" : "en";
   }, [language]);
+
+  useEffect(() => {
+    if (!aboutOpen) return;
+
+    const root = document.documentElement;
+    const previousRootOverflow = root.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    root.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setAboutOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      root.style.overflow = previousRootOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+    };
+  }, [aboutOpen]);
 
   useEffect(() => {
     const dialog = introDialog.current;
@@ -742,8 +1139,16 @@ export default function Home() {
           setLanguage={setLanguage}
           soundEnabled={soundEnabled}
           toggleSound={toggleSound}
+          onAbout={() => setAboutOpen(true)}
         />
       </header>
+
+      {aboutOpen && (
+        <AboutNoria
+          language={language}
+          onClose={() => setAboutOpen(false)}
+        />
+      )}
 
       <div className="hero-layout" id="top">
         <section className="map-column">
