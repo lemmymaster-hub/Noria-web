@@ -613,6 +613,7 @@ a:focus-visible,
   overscroll-behavior-y: contain;
   padding: 12px 12px 24px 0;
   scrollbar-color: rgba(101, 227, 241, 0.5) transparent;
+  scrollbar-gutter: stable;
   scrollbar-width: thin;
 }
 
