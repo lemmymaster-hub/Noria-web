@@ -749,98 +749,253 @@ a:focus-visible,
   width: 68%;
 }
 
-.products {
-  margin-top: 2px;
-}
-
-.products-head {
+.directions-link {
   align-items: center;
-  color: #8ab0c2;
-  display: flex;
-  font-size: 8px;
-  font-weight: 650;
-  justify-content: space-between;
-  letter-spacing: 0.17em;
-  margin-bottom: 8px;
+  align-self: flex-start;
+  border-bottom: 1px solid rgba(103, 242, 255, 0.6);
+  color: #b7fbff;
+  display: inline-flex;
+  font-size: 10px;
+  font-weight: 700;
+  gap: 20px;
+  letter-spacing: 0.13em;
+  padding: 9px 0;
+  text-decoration: none;
+  transition: color 180ms ease, gap 180ms ease;
 }
 
-.product-list {
+.directions-link:hover {
+  color: #ffffff;
+  gap: 26px;
+}
+
+.directions-link span:last-child {
+  font-size: 18px;
+  line-height: 0.6;
+}
+
+.direction-index {
+  border-top: 1px solid rgba(109, 226, 244, 0.23);
+  padding-top: 16px;
+}
+
+.direction-index-head {
+  align-items: center;
+  color: #8cc7d4;
+  display: flex;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 650;
+  gap: 14px;
+  justify-content: space-between;
+  letter-spacing: 0.11em;
+  margin-bottom: 10px;
+}
+
+.direction-index-head a {
+  color: #b7fbff;
+  font-family: inherit;
+  font-size: 8px;
+  text-decoration: none;
+}
+
+.direction-index-head a:hover,
+.direction-index-grid a:hover strong {
+  color: white;
+}
+
+.direction-index-grid {
   display: grid;
   gap: 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.product-card {
-  appearance: none;
+.direction-index-grid a {
   align-items: center;
-  background:
-    radial-gradient(circle at 0% 50%, color-mix(in srgb, var(--card-accent) 18%, transparent), transparent 32%),
-    linear-gradient(135deg, rgba(6, 52, 80, 0.9), rgba(3, 23, 46, 0.88));
-  border: 1px solid color-mix(in srgb, var(--card-accent) 56%, transparent);
-  border-radius: 14px;
-  box-shadow:
-    0 0 18px color-mix(in srgb, var(--card-accent) 12%, transparent),
-    inset 0 1px 0 rgba(217, 255, 255, 0.08);
-  color: inherit;
-  display: grid;
-  gap: 12px;
-  grid-template-columns: 42px 1fr;
-  padding: 10px 12px;
+  background: rgba(25, 91, 113, 0.19);
+  border: 1px solid rgba(106, 221, 240, 0.22);
+  border-radius: 10px;
+  display: flex;
+  gap: 9px;
+  min-height: 54px;
+  padding: 8px 11px;
+  text-decoration: none;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.direction-index-grid a:hover {
+  background: rgba(25, 129, 151, 0.25);
+  border-color: rgba(109, 243, 255, 0.58);
+}
+
+.direction-index-grid a > span {
+  color: #63bccc;
+  flex: 0 0 auto;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+}
+
+.direction-index-grid strong {
+  color: #e0f2f6;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.directions-section {
+  margin: 24px auto 76px;
+  max-width: 1720px;
   position: relative;
-  text-align: left;
+  scroll-margin-top: 24px;
+  z-index: 5;
+}
+
+.directions-heading {
+  align-items: end;
+  display: flex;
+  gap: 36px;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.directions-eyebrow,
+.direction-number,
+.direction-modules > span {
+  color: #74ceda;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+}
+
+.directions-heading h2 {
+  font-size: clamp(34px, 4vw, 64px);
+  font-weight: 410;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  margin: 12px 0 0;
+}
+
+.directions-heading > p {
+  color: #a9c9d6;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 5px;
+  max-width: 370px;
+}
+
+.directions-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.direction-card {
+  --direction-accent: #2ff1ff;
+  background:
+    radial-gradient(circle at 95% 0%, color-mix(in srgb, var(--direction-accent) 13%, transparent), transparent 44%),
+    linear-gradient(145deg, rgba(7, 39, 64, 0.96), rgba(2, 17, 37, 0.96));
+  border: 1px solid color-mix(in srgb, var(--direction-accent) 37%, transparent);
+  border-radius: 22px;
+  box-shadow: inset 0 1px 0 rgba(234, 255, 255, 0.07), 0 20px 55px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  min-height: 336px;
+  overflow: hidden;
+  padding: clamp(22px, 2.6vw, 42px);
+  position: relative;
+  scroll-margin-top: 24px;
+}
+
+.direction-card::after {
+  background: linear-gradient(90deg, var(--direction-accent), transparent 75%);
+  bottom: 0;
+  content: "";
+  height: 2px;
+  left: 0;
+  opacity: 0.65;
+  position: absolute;
   width: 100%;
 }
 
-.product-card:nth-child(1) {
-  --card-accent: #2ff1ff;
-}
+.direction-card:nth-child(2) { --direction-accent: #48ffd2; }
+.direction-card:nth-child(3) { --direction-accent: #8fa2ff; }
+.direction-card:nth-child(4) { --direction-accent: #c99aff; }
 
-.product-card:nth-child(2) {
-  --card-accent: #45ffd2;
-}
-
-.product-card:nth-child(3) {
-  --card-accent: #9f73ff;
-}
-
-.product-code {
-  align-items: center;
-  background:
-    radial-gradient(circle at 40% 32%, color-mix(in srgb, var(--card-accent) 32%, transparent), transparent 62%),
-    #061a32;
-  border: 1px solid color-mix(in srgb, var(--card-accent) 64%, transparent);
-  border-radius: 11px;
-  color: #bfffff;
+.direction-topline {
+  align-items: flex-start;
   display: flex;
+  justify-content: space-between;
+  min-height: 45px;
+}
+
+.direction-symbol {
+  color: color-mix(in srgb, var(--direction-accent) 82%, white);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 8px;
+  font-size: clamp(20px, 2.3vw, 34px);
   font-weight: 700;
-  height: 38px;
-  justify-content: center;
-  letter-spacing: 0.04em;
-  box-shadow: 0 0 16px color-mix(in srgb, var(--card-accent) 22%, transparent);
-  text-shadow: 0 0 12px color-mix(in srgb, var(--card-accent) 86%, transparent);
-  width: 38px;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  opacity: 0.72;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--direction-accent) 50%, transparent);
 }
 
-.product-card small {
-  color: #78a8bd;
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 6px;
-  letter-spacing: 0.13em;
+.direction-content {
+  margin: 13px 0 28px;
+  max-width: 620px;
 }
 
-.product-card h3 {
-  font-size: 12px;
-  font-weight: 590;
-  letter-spacing: 0.01em;
-  margin: 1px 0 2px;
+.direction-content h3 {
+  font-size: clamp(25px, 2.3vw, 38px);
+  font-weight: 530;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  margin: 0 0 13px;
 }
 
-.product-card p {
-  color: #a0bfce;
-  font-size: 9px;
-  line-height: 1.4;
+.direction-content p {
+  color: #bad2de;
+  font-size: clamp(13px, 1vw, 16px);
+  line-height: 1.58;
   margin: 0;
+  max-width: 590px;
+}
+
+.direction-modules {
+  border-top: 1px solid rgba(151, 231, 244, 0.18);
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.direction-modules > span {
+  color: #8bacbb;
+  font-size: 9px;
+}
+
+.direction-modules ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+
+.direction-modules li {
+  background: color-mix(in srgb, var(--direction-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--direction-accent) 23%, transparent);
+  border-radius: 999px;
+  color: #d7ecf4;
+  font-size: 11px;
+  line-height: 1.35;
+  padding: 7px 11px;
+}
+
+.direction-card:first-child .direction-modules li:first-child {
+  background: rgba(47, 241, 255, 0.17);
+  border-color: rgba(47, 241, 255, 0.55);
+  color: #edffff;
+  font-weight: 680;
 }
 
 .capabilities {
@@ -1700,8 +1855,10 @@ footer div {
     font-size: clamp(44px, 7vw, 68px);
   }
 
-  .product-card p {
-    font-size: 10px;
+  .directions-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
@@ -1812,8 +1969,26 @@ footer div {
     display: none;
   }
 
-  .product-card {
-    grid-template-columns: 42px 1fr;
+  .directions-section {
+    margin-top: 18px;
+    margin-bottom: 48px;
+  }
+
+  .directions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .direction-card {
+    min-height: 0;
+    padding: 25px 22px;
+  }
+
+  .direction-content {
+    margin: 13px 0 24px;
+  }
+
+  .direction-content h3 {
+    font-size: 27px;
   }
 
   .sound-toggle,

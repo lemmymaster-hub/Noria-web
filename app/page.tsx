@@ -64,27 +64,41 @@ const copy = {
     heroTitleA: "Povezujemo gradove.",
     heroTitleB: "Pojednostavljujemo kretanje.",
     heroText:
-      "Gradimo modularne softverske proizvode koji povezuju urbanu mobilnost, gradske servise i ljude u jedno digitalno iskustvo.",
+      "Gradimo digitalni operativni sloj koji povezuje mobilnost, gradske podatke, otpornu komunikaciju i inteligentnu infrastrukturu.",
     status: "SISTEM U IZGRADNJI",
     statusTitle: "Mreža je aktivna. Platforma se gradi.",
     statusText:
       "Naš puni web doživljaj uskoro stiže online. Do tada, ovo je prvi signal iz Noria mreže.",
-    productsLabel: "PROIZVODI U RAZVOJU",
-    products: [
+    directionsLabel: "ČETIRI PRAVCA NORIJE",
+    directionsTitle: "Jedna vizija. Četiri povezana pravca.",
+    directionsIntro:
+      "Modularni sistemi koji povezuju usluge za građane, operativne podatke i fizički svijet.",
+    exploreDirections: "ISTRAŽI ČETIRI PRAVCA",
+    moduleLabel: "PROIZVODI I MODULI",
+    directions: [
       {
         code: "BSL",
-        title: "BSL Mobility",
-        text: "Jedna modularna platforma za parking, EV punjenje, javni prevoz i digitalna plaćanja.",
+        title: "BSL — Balkan Smart Life",
+        text: "Platforma za urbanu mobilnost i gradske servise: jedno iskustvo za građane, povezani alati za operatere.",
+        modules: ["Parkiraj.ba / BSL Parking", "BSL Transit", "BSL Taxi", "BSL EV", "BSL Wallet"],
       },
       {
-        code: "P",
-        title: "Parkiraj.ba",
-        text: "Pametno pronalaženje parkinga, navigacija i buduće integrisano plaćanje.",
+        code: "UI",
+        title: "Urban Intelligence",
+        text: "City Dashboard objedinjuje podatke o gradu i mobilnosti za praćenje, analitiku i bolje operativne odluke.",
+        modules: ["City Dashboard", "Mobility Analytics", "AI preporuke"],
       },
       {
-        code: "MESH",
+        code: "NRN",
         title: "NRN Mesh",
-        text: "Noria Resilience Network Mesh — otporna offline komunikacija, SOS i koordinacija terenskih timova.",
+        text: "Otporna komunikacijska mreža za offline poruke, SOS i koordinaciju terenskih timova kada obična mreža nije dostupna.",
+        modules: ["Offline komunikacija", "SOS & relay", "Dispatch Center"],
+      },
+      {
+        code: "AI",
+        title: "AI & Smart Infrastructure",
+        text: "Računarski vid i analiza podataka za pregled, praćenje i pametnije upravljanje fizičkom infrastrukturom.",
+        modules: ["Smart Parking Vision", "Noria Smart Inspector", "Infrastructure Analytics"],
       },
     ],
     company:
@@ -109,27 +123,41 @@ const copy = {
     heroTitleA: "Connecting cities.",
     heroTitleB: "Simplifying movement.",
     heroText:
-      "We build modular software products that bring urban mobility, city services and people into one connected digital experience.",
+      "We build a digital operating layer connecting mobility, city data, resilient communications and intelligent infrastructure.",
     status: "SYSTEM UNDER CONSTRUCTION",
     statusTitle: "The network is live. The platform is being built.",
     statusText:
       "Our complete web experience is coming online soon. Until then, this is the first signal from the Noria network.",
-    productsLabel: "PRODUCTS IN DEVELOPMENT",
-    products: [
+    directionsLabel: "FOUR DIRECTIONS OF NORIA",
+    directionsTitle: "One vision. Four connected directions.",
+    directionsIntro:
+      "Modular systems connecting citizen services, operational data and the physical world.",
+    exploreDirections: "EXPLORE FOUR DIRECTIONS",
+    moduleLabel: "PRODUCTS & MODULES",
+    directions: [
       {
         code: "BSL",
-        title: "BSL Mobility",
-        text: "One modular platform for parking, EV charging, public transport and digital payments.",
+        title: "BSL — Balkan Smart Life",
+        text: "A platform for urban mobility and city services: one experience for citizens, connected tools for operators.",
+        modules: ["Parkiraj.ba / BSL Parking", "BSL Transit", "BSL Taxi", "BSL EV", "BSL Wallet"],
       },
       {
-        code: "P",
-        title: "Parkiraj.ba",
-        text: "Smart parking discovery, navigation and future integrated payment.",
+        code: "UI",
+        title: "Urban Intelligence",
+        text: "City Dashboard unifies city and mobility data for monitoring, analytics and better operational decisions.",
+        modules: ["City Dashboard", "Mobility Analytics", "AI recommendations"],
       },
       {
-        code: "MESH",
+        code: "NRN",
         title: "NRN Mesh",
-        text: "Noria Resilience Network Mesh — resilient offline communication, SOS and field-team coordination.",
+        text: "A resilient communications network for offline messages, SOS and field-team coordination when regular networks are unavailable.",
+        modules: ["Offline communications", "SOS & relay", "Dispatch Center"],
+      },
+      {
+        code: "AI",
+        title: "AI & Smart Infrastructure",
+        text: "Computer vision and data analysis for inspecting, monitoring and managing physical infrastructure more intelligently.",
+        modules: ["Smart Parking Vision", "Noria Smart Inspector", "Infrastructure Analytics"],
       },
     ],
     company:
@@ -1181,31 +1209,56 @@ export default function Home() {
             </div>
           </aside>
 
-          <div className="products">
-            <div className="products-head">
-              <span>{t.productsLabel}</span>
-              <span>03</span>
+          <nav aria-label={t.directionsLabel} className="direction-index">
+            <div className="direction-index-head">
+              <span>{t.directionsLabel}</span>
+              <a href="#noria-directions">{t.exploreDirections} <span aria-hidden="true">↘</span></a>
             </div>
-            <div className="product-list">
-              {t.products.map((product, index) => (
-                <article
-                  className="product-card"
-                  key={product.title}
-                >
-                  <div className="product-code">{product.code}</div>
-                  <div>
-                    <small>0{index + 1}</small>
-                    <h3>{product.title}</h3>
-                    <p>{product.text}</p>
-                  </div>
-                </article>
+            <div className="direction-index-grid">
+              {t.directions.map((direction, index) => (
+                <a href={`#direction-${direction.code.toLowerCase()}`} key={direction.code}>
+                  <span>0{index + 1}</span>
+                  <strong>{direction.title}</strong>
+                </a>
               ))}
             </div>
-          </div>
+          </nav>
 
           <p className="capabilities">{t.company}</p>
         </section>
       </div>
+
+      <section aria-labelledby="directions-title" className="directions-section" id="noria-directions">
+        <div className="directions-heading">
+          <div>
+            <span className="directions-eyebrow">NORIA / 01—04 · {t.directionsLabel}</span>
+            <h2 id="directions-title">{t.directionsTitle}</h2>
+          </div>
+          <p>{t.directionsIntro}</p>
+        </div>
+        <div className="directions-grid">
+          {t.directions.map((direction, index) => (
+            <article className="direction-card" id={`direction-${direction.code.toLowerCase()}`} key={direction.code}>
+              <div className="direction-topline">
+                <span className="direction-number">0{index + 1} / 04</span>
+                <span className="direction-symbol" aria-hidden="true">{direction.code}</span>
+              </div>
+              <div className="direction-content">
+                <h3>{direction.title}</h3>
+                <p>{direction.text}</p>
+              </div>
+              <div className="direction-modules">
+                <span>{t.moduleLabel}</span>
+                <ul>
+                  {direction.modules.map((module) => (
+                    <li key={module}>{module}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <footer>
         <p>{t.footer}</p>
