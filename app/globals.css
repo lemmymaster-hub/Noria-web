@@ -52,7 +52,7 @@ a:focus-visible,
 
 .site-shell {
   isolation: isolate;
-  min-height: 100svh;
+  height: 100svh;
   overflow: hidden;
   padding: 24px clamp(22px, 3vw, 52px) 18px;
   position: relative;
@@ -285,13 +285,14 @@ a:focus-visible,
 }
 
 .hero-layout {
-  align-items: start;
+  align-items: stretch;
   display: grid;
   gap: clamp(20px, 2vw, 38px);
   grid-template-columns: minmax(0, 1.85fr) minmax(360px, 1fr);
   margin: 0 auto;
   max-width: 1880px;
-  min-height: calc(100svh - 112px);
+  height: calc(100svh - 98px);
+  min-height: 0;
   position: relative;
   z-index: 5;
 }
@@ -303,8 +304,8 @@ a:focus-visible,
 
 .map-column {
   align-items: flex-start;
-  aspect-ratio: 1 / 1;
   display: flex;
+  height: 100%;
   min-height: 0;
   width: 100%;
 }
@@ -602,11 +603,17 @@ a:focus-visible,
 }
 
 .info-column {
-  align-self: center;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 12px 0 24px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: 12px 12px 24px 0;
+  scrollbar-color: rgba(101, 227, 241, 0.5) transparent;
+  scrollbar-width: thin;
 }
 
 .hero-copy {
@@ -812,9 +819,9 @@ a:focus-visible,
 
 .direction-index-grid a {
   align-items: center;
-  background: rgba(25, 91, 113, 0.19);
-  border: 1px solid rgba(106, 221, 240, 0.22);
-  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(8, 67, 94, 0.62), rgba(3, 25, 52, 0.64));
+  border: 1px solid rgba(99, 240, 255, 0.4);
+  border-radius: 12px;
   display: flex;
   gap: 9px;
   min-height: 54px;
@@ -837,25 +844,24 @@ a:focus-visible,
 
 .direction-index-grid strong {
   color: #e0f2f6;
-  font-size: 12px;
-  font-weight: 550;
+  font-size: 13px;
+  font-weight: 700;
   line-height: 1.2;
 }
 
 .directions-section {
-  margin: 24px auto 76px;
-  max-width: 1720px;
+  margin: 48px 0 0;
   position: relative;
   scroll-margin-top: 24px;
   z-index: 5;
 }
 
 .directions-heading {
-  align-items: end;
+  align-items: start;
   display: flex;
-  gap: 36px;
-  justify-content: space-between;
-  margin-bottom: 26px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
 }
 
 .directions-eyebrow,
@@ -869,9 +875,9 @@ a:focus-visible,
 }
 
 .directions-heading h2 {
-  font-size: clamp(34px, 4vw, 64px);
-  font-weight: 410;
-  letter-spacing: -0.055em;
+  font-size: clamp(34px, 3.2vw, 52px);
+  font-weight: 750;
+  letter-spacing: -0.05em;
   line-height: 1.05;
   margin: 12px 0 0;
 }
@@ -881,46 +887,44 @@ a:focus-visible,
   font-size: 15px;
   line-height: 1.6;
   margin: 0 0 5px;
-  max-width: 370px;
+  max-width: 540px;
 }
 
 .directions-grid {
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  grid-template-columns: 1fr;
 }
 
 .direction-card {
-  --direction-accent: #2ff1ff;
+  backdrop-filter: blur(22px);
   background:
-    radial-gradient(circle at 95% 0%, color-mix(in srgb, var(--direction-accent) 13%, transparent), transparent 44%),
-    linear-gradient(145deg, rgba(7, 39, 64, 0.96), rgba(2, 17, 37, 0.96));
-  border: 1px solid color-mix(in srgb, var(--direction-accent) 37%, transparent);
-  border-radius: 22px;
-  box-shadow: inset 0 1px 0 rgba(234, 255, 255, 0.07), 0 20px 55px rgba(0, 0, 0, 0.14);
+    radial-gradient(circle at 15% 0%, rgba(51, 255, 222, 0.18), transparent 38%),
+    linear-gradient(135deg, rgba(8, 67, 94, 0.92), rgba(3, 25, 52, 0.9));
+  border: 1px solid rgba(99, 240, 255, 0.55);
+  border-radius: 18px;
+  box-shadow:
+    0 0 30px rgba(34, 229, 255, 0.13),
+    0 18px 50px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(214, 255, 255, 0.14);
   display: flex;
   flex-direction: column;
-  min-height: 336px;
   overflow: hidden;
-  padding: clamp(22px, 2.6vw, 42px);
+  padding: 24px;
   position: relative;
   scroll-margin-top: 24px;
 }
 
 .direction-card::after {
-  background: linear-gradient(90deg, var(--direction-accent), transparent 75%);
-  bottom: 0;
+  animation: card-scan 5.5s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent, rgba(183, 255, 255, 0.72), transparent);
   content: "";
-  height: 2px;
-  left: 0;
-  opacity: 0.65;
+  height: 1px;
+  left: -70%;
   position: absolute;
-  width: 100%;
+  top: 0;
+  width: 60%;
 }
-
-.direction-card:nth-child(2) { --direction-accent: #48ffd2; }
-.direction-card:nth-child(3) { --direction-accent: #8fa2ff; }
-.direction-card:nth-child(4) { --direction-accent: #c99aff; }
 
 .direction-topline {
   align-items: flex-start;
@@ -930,24 +934,24 @@ a:focus-visible,
 }
 
 .direction-symbol {
-  color: color-mix(in srgb, var(--direction-accent) 82%, white);
+  color: var(--aqua);
   font-family: var(--font-geist-mono), monospace;
-  font-size: clamp(20px, 2.3vw, 34px);
+  font-size: 23px;
   font-weight: 700;
   letter-spacing: -0.08em;
   line-height: 1;
-  opacity: 0.72;
-  text-shadow: 0 0 24px color-mix(in srgb, var(--direction-accent) 50%, transparent);
+  opacity: 0.9;
+  text-shadow: 0 0 18px rgba(51, 255, 222, 0.32);
 }
 
 .direction-content {
-  margin: 13px 0 28px;
+  margin: 8px 0 25px;
   max-width: 620px;
 }
 
 .direction-content h3 {
-  font-size: clamp(25px, 2.3vw, 38px);
-  font-weight: 530;
+  font-size: clamp(27px, 2.4vw, 36px);
+  font-weight: 750;
   letter-spacing: -0.04em;
   line-height: 1.12;
   margin: 0 0 13px;
@@ -982,8 +986,8 @@ a:focus-visible,
 }
 
 .direction-modules li {
-  background: color-mix(in srgb, var(--direction-accent) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--direction-accent) 23%, transparent);
+  background: rgba(51, 255, 222, 0.08);
+  border: 1px solid rgba(99, 240, 255, 0.3);
   border-radius: 999px;
   color: #d7ecf4;
   font-size: 11px;
@@ -1014,7 +1018,7 @@ footer {
   font-size: 8px;
   justify-content: space-between;
   letter-spacing: 0.08em;
-  margin: 11px auto 0;
+  margin: 34px 0 0;
   max-width: 1720px;
   position: relative;
   text-transform: uppercase;
@@ -1832,22 +1836,30 @@ footer div {
 
 @media (max-width: 980px) {
   .site-shell {
+    height: auto;
+    min-height: 100svh;
     overflow: visible;
   }
 
   .hero-layout {
     grid-template-columns: 1fr;
+    height: auto;
   }
 
   .map-column {
+    aspect-ratio: 1 / 1;
+    height: auto;
     margin: 0 auto;
     max-width: 820px;
     min-height: 0;
   }
 
   .info-column {
+    height: auto;
     margin: 0 auto;
     max-width: 760px;
+    overflow: visible;
+    padding-right: 0;
     width: 100%;
   }
 
