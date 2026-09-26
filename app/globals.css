@@ -774,6 +774,74 @@ a:focus-visible,
   line-height: 0.6;
 }
 
+.direction-index {
+  border-top: 1px solid rgba(109, 226, 244, 0.23);
+  padding-top: 16px;
+}
+
+.direction-index-head {
+  align-items: center;
+  color: #8cc7d4;
+  display: flex;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  font-weight: 650;
+  gap: 14px;
+  justify-content: space-between;
+  letter-spacing: 0.11em;
+  margin-bottom: 10px;
+}
+
+.direction-index-head a {
+  color: #b7fbff;
+  font-family: inherit;
+  font-size: 8px;
+  text-decoration: none;
+}
+
+.direction-index-head a:hover,
+.direction-index-grid a:hover strong {
+  color: white;
+}
+
+.direction-index-grid {
+  display: grid;
+  gap: 7px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.direction-index-grid a {
+  align-items: center;
+  background: rgba(25, 91, 113, 0.19);
+  border: 1px solid rgba(106, 221, 240, 0.22);
+  border-radius: 10px;
+  display: flex;
+  gap: 9px;
+  min-height: 54px;
+  padding: 8px 11px;
+  text-decoration: none;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.direction-index-grid a:hover {
+  background: rgba(25, 129, 151, 0.25);
+  border-color: rgba(109, 243, 255, 0.58);
+}
+
+.direction-index-grid a > span {
+  color: #63bccc;
+  flex: 0 0 auto;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+}
+
+.direction-index-grid strong {
+  color: #e0f2f6;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
 .directions-section {
   margin: 24px auto 76px;
   max-width: 1720px;
@@ -836,6 +904,7 @@ a:focus-visible,
   overflow: hidden;
   padding: clamp(22px, 2.6vw, 42px);
   position: relative;
+  scroll-margin-top: 24px;
 }
 
 .direction-card::after {
