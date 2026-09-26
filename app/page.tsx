@@ -1225,10 +1225,7 @@ export default function Home() {
           </nav>
 
           <p className="capabilities">{t.company}</p>
-        </section>
-      </div>
-
-      <section aria-labelledby="directions-title" className="directions-section" id="noria-directions">
+          <section aria-labelledby="directions-title" className="directions-section" id="noria-directions">
         <div className="directions-heading">
           <div>
             <span className="directions-eyebrow">NORIA / 01—04 · {t.directionsLabel}</span>
@@ -1258,16 +1255,18 @@ export default function Home() {
             </article>
           ))}
         </div>
-      </section>
+          </section>
 
-      <footer>
-        <p>{t.footer}</p>
-        <div>
-          <span>43.8563° N</span>
-          <span>18.4131° E</span>
-          <span>© 2026 NORIA</span>
-        </div>
-      </footer>
+          <footer>
+            <p>{t.footer}</p>
+            <div>
+              <span>43.8563° N</span>
+              <span>18.4131° E</span>
+              <span>© 2026 NORIA</span>
+            </div>
+          </footer>
+        </section>
+      </div>
     </main>
   );
 }
