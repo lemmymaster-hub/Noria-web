@@ -53,7 +53,7 @@ a:focus-visible,
 .site-shell {
   isolation: isolate;
   height: 100svh;
-  overflow: hidden;
+  overflow: clip;
   padding: 24px clamp(22px, 3vw, 52px) 18px;
   position: relative;
   background:
