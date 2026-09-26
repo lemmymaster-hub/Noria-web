@@ -883,7 +883,7 @@ footer div {
     radial-gradient(circle at 88% 80%, rgba(161, 109, 255, 0.09), transparent 30%),
     rgba(1, 8, 22, 0.56);
   inset: 0;
-  overflow-y: auto;
+  overflow: hidden;
   overscroll-behavior: contain;
   padding: 24px;
   position: fixed;
@@ -900,11 +900,15 @@ footer div {
     0 40px 120px rgba(0, 0, 0, 0.5),
     0 0 60px rgba(40, 242, 255, 0.08),
     inset 0 1px 0 rgba(220, 255, 255, 0.1);
+  height: calc(100dvh - 48px);
   margin: 0 auto;
   max-width: 1320px;
-  min-height: calc(100dvh - 48px);
-  overflow: hidden;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
+  scrollbar-color: rgba(72, 255, 210, 0.42) rgba(3, 21, 43, 0.28);
+  scrollbar-width: thin;
 }
 
 .about-shell::before {
@@ -1827,7 +1831,8 @@ footer div {
 
   .about-shell {
     border-radius: 20px;
-    min-height: calc(100dvh - 16px);
+    height: calc(100dvh - 16px);
+    min-height: 0;
   }
 
   .about-topline {
