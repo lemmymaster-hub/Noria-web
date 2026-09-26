@@ -1209,10 +1209,20 @@ export default function Home() {
             </div>
           </aside>
 
-          <a className="directions-link" href="#noria-directions">
-            <span>{t.exploreDirections}</span>
-            <span aria-hidden="true">↘</span>
-          </a>
+          <nav aria-label={t.directionsLabel} className="direction-index">
+            <div className="direction-index-head">
+              <span>{t.directionsLabel}</span>
+              <a href="#noria-directions">{t.exploreDirections} <span aria-hidden="true">↘</span></a>
+            </div>
+            <div className="direction-index-grid">
+              {t.directions.map((direction, index) => (
+                <a href={`#direction-${direction.code.toLowerCase()}`} key={direction.code}>
+                  <span>0{index + 1}</span>
+                  <strong>{direction.title}</strong>
+                </a>
+              ))}
+            </div>
+          </nav>
 
           <p className="capabilities">{t.company}</p>
         </section>
@@ -1228,7 +1238,7 @@ export default function Home() {
         </div>
         <div className="directions-grid">
           {t.directions.map((direction, index) => (
-            <article className="direction-card" key={direction.code}>
+            <article className="direction-card" id={`direction-${direction.code.toLowerCase()}`} key={direction.code}>
               <div className="direction-topline">
                 <span className="direction-number">0{index + 1} / 04</span>
                 <span className="direction-symbol" aria-hidden="true">{direction.code}</span>
