@@ -49,9 +49,16 @@ test("serves useful homepage content without JavaScript or a blocking intro", as
   assert.match(html, /<html\b[^>]*lang="bs"/);
   assert.match(html, /<title>Noria Technologies/);
   assert.match(html, /<h1\b[^>]*>Povezujemo gradove\./);
-  assert.match(html, /PROIZVODI U RAZVOJU/);
-  assert.equal([...html.matchAll(/<article\b[^>]*class="product-card"/g)].length, 3);
-  assert.doesNotMatch(html, /<button\b[^>]*class="product-card"/);
+  assert.match(html, /ČETIRI PRAVCA NORIJE/);
+  const directions = [...html.matchAll(/<article\b[^>]*class="direction-card"[^>]*>[\s\S]*?<\/article>/g)]
+    .map((match) => match[0]);
+  assert.equal(directions.length, 4);
+  assert.match(directions[0], /BSL — Balkan Smart Life/);
+  assert.match(directions[0], /Parkiraj\.ba \/ BSL Parking/);
+  assert.match(directions[1], /Urban Intelligence/);
+  assert.match(directions[2], /NRN Mesh/);
+  assert.match(directions[3], /AI &amp; Smart Infrastructure/);
+  assert.doesNotMatch(html, /class="product-card"/);
   assert.doesNotMatch(html, /<dialog\b/);
 });
 
