@@ -146,7 +146,7 @@ const aboutCopy = {
   bhs: {
     button: "O NORIA",
     close: "ZATVORI",
-    eyebrow: "NORIA TECHNOLOGIES · COMPANY BLUEPRINT",
+    eyebrow: "NORIA TECHNOLOGIES · O KOMPANIJI",
     title: "Inteligentna infrastruktura za povezane gradove i otporna okruženja.",
     intro:
       "Noria Technologies razvija digitalnu infrastrukturu, softverske platforme i inteligentne sisteme koji povezuju urbanu mobilnost, gradske servise, fizičku infrastrukturu, podatke, AI i otpornu komunikaciju u jedinstvene operativne cjeline.",
@@ -218,9 +218,9 @@ const aboutCopy = {
     nearLabel: "BLISKA BUDUĆNOST · 0–12 MJESECI",
     near: [
       "Preći iz prototype company u deployment company.",
-      "Formalizovati kompaniju, vlasništvo, IP i osnovne operativne procese.",
+      "Ojačati korporativne, IP i osnovne operativne temelje za rast kompanije.",
       "BSL fokusirati na Parking + Transit + City Dashboard i pripremiti produkcijski pilot.",
-      "Pretvoriti razgovore sa gradovima, uključujući Banja Luku, u konkretan PoC ili pilot bez predstavljanja interesa kao ugovorenog klijenta.",
+      "Pretvoriti aktivne razgovore sa gradovima i operatorima u konkretan PoC, pilot ili komercijalnu implementaciju.",
       "NRN Mesh stabilizovati za višeurđajni field test: relay + SOS + lokacija + Dispatch Center MVP.",
       "Dobiti prvi komercijalni ugovor ili formalni pilot, realne korisnike, realne podatke i mjerljive KPI-jeve.",
     ],
@@ -247,7 +247,7 @@ const aboutCopy = {
   en: {
     button: "ABOUT NORIA",
     close: "CLOSE",
-    eyebrow: "NORIA TECHNOLOGIES · COMPANY BLUEPRINT",
+    eyebrow: "NORIA TECHNOLOGIES · ABOUT THE COMPANY",
     title: "Intelligent infrastructure for connected cities and resilient environments.",
     intro:
       "Noria Technologies develops digital infrastructure, software platforms and intelligent systems that connect urban mobility, city services, physical infrastructure, real-time data, AI and resilient communications into integrated operational environments.",
@@ -319,9 +319,9 @@ const aboutCopy = {
     nearLabel: "NEAR TERM · 0–12 MONTHS",
     near: [
       "Move from a prototype company to a deployment company.",
-      "Formalize the company, ownership, IP and core operating processes.",
+      "Strengthen the corporate, IP and operating foundations required for growth.",
       "Focus BSL on Parking + Transit + City Dashboard and prepare a production-grade pilot.",
-      "Turn city discussions, including Banja Luka, into a concrete PoC or pilot without presenting interest as a signed customer.",
+      "Turn active discussions with cities and operators into a concrete PoC, pilot or commercial deployment.",
       "Stabilize NRN Mesh for a multi-device field test: relay + SOS + location + Dispatch Center MVP.",
       "Secure the first commercial contract or formal pilot with real users, real data and measurable KPIs.",
     ],
